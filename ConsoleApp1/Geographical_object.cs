@@ -24,11 +24,14 @@ public abstract class Geographical_object
         _name = name;
         _description = desc;
     }
-    public abstract void GetInfo();
+
+    public virtual void GetInfo()
+    {
+        
+    }
 
     public void GetSimpleInfo() // method to avoid duplication
     {
-        Console.WriteLine("Географічний об'єкт: Річка");
         Console.WriteLine($"Координата Х: {x}");
         Console.WriteLine($"Координата У: {y} ");
         Console.WriteLine($"Назва: {Name}");
@@ -48,6 +51,7 @@ public class River : Geographical_object
     }
     public override void GetInfo()
     {
+        Console.WriteLine("Географічний об'єкт: Річка");
         GetSimpleInfo();
         
         Console.WriteLine($"Швидкість течії (см/с): {_flow_rate} ");
@@ -66,6 +70,7 @@ public class Mountain : Geographical_object
     }
     public override void GetInfo()
     {
+        Console.WriteLine("Географічний об'єкт: Гора");
         GetSimpleInfo(); 
         
         Console.WriteLine($"Найвища точка: {_peak} метрів");
