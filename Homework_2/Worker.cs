@@ -67,10 +67,10 @@ public class Manager : Worker
 
     public override void FillWorkDay()
     {
+        Call();
+        Relax();
         for (int i = 1; i <= 3; i++)
         {
-            Call();
-            Relax();
             Call();
         }
     }
