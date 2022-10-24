@@ -12,9 +12,11 @@ namespace WindowsFormsApp2
 {
     public partial class Form2 : Form
     {
-        public Form2()
+        DataGridView DGV = new DataGridView();
+        public Form2(DataGridView dataGridView)
         {
             InitializeComponent();
+            DGV = dataGridView;
         }
         
         private void AddB_Click(object sender, EventArgs e)
@@ -24,6 +26,9 @@ namespace WindowsFormsApp2
                 Book book = new Book(Book.maxVal + 1, textBox1.Text, textBox2.Text, Int32.Parse(textBox3.Text), false);
                 Form1.form1instance.books.Add(book);
                 Form1.form1instance.bindingSource1.ResetBindings(false);
+                DGV.AutoResizeColumns(); // resize
+
+
             }
             catch (Exception ex)
             {
@@ -34,6 +39,11 @@ namespace WindowsFormsApp2
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
         {
 
         }
