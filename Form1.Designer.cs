@@ -35,12 +35,12 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.B = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.BookName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PageCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PublishingHouse = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
@@ -85,6 +85,7 @@
             this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.AllowUserToDeleteRows = false;
             this.dataGridView.AutoGenerateColumns = false;
+            this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.idDataGridViewTextBoxColumn, this.B, this.BookName, this.PageCount, this.PublishingHouse });
             this.dataGridView.DataSource = this.bindingSource1;
@@ -93,10 +94,6 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(800, 425);
             this.dataGridView.TabIndex = 1;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(WindowsFormsApp2.Book);
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -112,6 +109,7 @@
             this.B.Name = "B";
             this.B.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.B.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.B.Width = 39;
             // 
             // BookName
             // 
@@ -119,6 +117,7 @@
             this.BookName.HeaderText = "Назва";
             this.BookName.Name = "BookName";
             this.BookName.ReadOnly = true;
+            this.BookName.Width = 64;
             // 
             // PageCount
             // 
@@ -126,6 +125,7 @@
             this.PageCount.HeaderText = "К-ть сторінок";
             this.PageCount.Name = "PageCount";
             this.PageCount.ReadOnly = true;
+            this.PageCount.Width = 99;
             // 
             // PublishingHouse
             // 
@@ -133,6 +133,11 @@
             this.PublishingHouse.HeaderText = "Видавництво";
             this.PublishingHouse.Name = "PublishingHouse";
             this.PublishingHouse.ReadOnly = true;
+            this.PublishingHouse.Width = 98;
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(WindowsFormsApp2.Book);
             // 
             // Form1
             // 

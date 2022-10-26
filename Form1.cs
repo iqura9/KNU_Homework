@@ -22,15 +22,15 @@ namespace WindowsFormsApp2
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            books.Add(new Book(1, "Шерлок Холмс", "А-БА-БА-ГА-ЛА-МА-ГА",750,true));
-            books.Add(new Book(2, "Паскудна звістка", "Фабула",222,false));
+            books.Add(new Book("Шерлок Холмс", "А-БА-БА-ГА-ЛА-МА-ГА",750,true));
+            books.Add(new Book("Паскудна звістка", "Фабула",222,false));
             bindingSource1.DataSource = books;
             dataGridView.RowHeadersVisible = false;
-            dataGridView.AutoResizeColumns();
+            //dataGridView.AutoResizeColumns();
         }
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            Form2 f2 = new Form2(dataGridView);
+            Form2 f2 = new Form2();
             f2.ShowDialog();
         }
         private void toolStripButton2_Click(object sender, EventArgs e)
