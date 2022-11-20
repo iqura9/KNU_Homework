@@ -2,162 +2,147 @@
 
 namespace AbstractFactory
 {
-    class Program
+    // Mainapp test application
+    internal class MainApp
     {
-        class Pizza
+        private static void Main()
         {
-            string dough;
-            string sauce;
-            string topping;
+            var m = new ConcreteMediator();
+            var c1 = new ConcreteColleague1(m);
+            var c2 = new ConcreteColleague2(m);
+            var c3 = new ConcreteColleague3(m);
+            m.Colleague1 = c1;
+            m.Colleague2 = c2;
+            m.Colleague3 = c3;
+            m.Send("How are you?", c1);
+            m.Send("Fine, thanks", c2);
+            m.Send("Hello!", c3);
+            
+            // Wait for user
+            Console.Read();
+        }
+    }
 
-            public Pizza()
-            {
-            }
+    // "Mediator"
+    internal abstract class Mediator
+    {
+        public abstract void Send(string message,
+            Colleague colleague);
+    }
 
-            public void SetDough(string d)
-            {
-                dough = d;
-            }
+    // "ConcreteMediator"
+    internal class ConcreteMediator : Mediator
+    {
+        private ConcreteColleague1 colleague1;
+        private ConcreteColleague2 colleague2;
+        private ConcreteColleague3 colleague3;
 
-            public void SetSauce(string s)
-            {
-                sauce = s;
-            }
-
-            public void SetTopping(string t)
-            {
-                topping = t;
-            }
-
-            public void Info()
-            {
-                Console.WriteLine("Dough: {0}\nSause: {1}\nTopping: {2}",
-                    dough, sauce, topping);
-            }
+        public ConcreteColleague1 Colleague1
+        {
+            set => colleague1 = value;
         }
 
-        //Abstract Builder
-        abstract class PizzaBuilder
+        public ConcreteColleague2 Colleague2
         {
-            protected Pizza pizza;
-
-            public PizzaBuilder()
-            {
-            }
-
-            public Pizza GetPizza()
-            {
-                return pizza;
-            }
-
-            public void CreateNewPizza()
-            {
-                pizza = new Pizza();
-            }
-
-            public abstract void BuildDough();
-            public abstract void BuildSauce();
-            public abstract void BuildTopping();
+            set => colleague2 = value;
+        }
+        public ConcreteColleague3 Colleague3
+        {
+            set => colleague3 = value;
         }
 
-        //Concrete Builder
-        class HawaiianPizzaBuilder : PizzaBuilder
+        public override void Send(string message,
+            Colleague colleague)
         {
-            public override void BuildDough()
+            if (colleague == colleague1)
             {
-                pizza.SetDough("cross");
+                colleague2.Notify(message);
+                colleague3.Notify(message);
             }
+            else if (colleague == colleague2)
+            {
+                colleague1.Notify(message);
+                colleague3.Notify(message);
+            }
+            else if (colleague == colleague3)
+            {
+                colleague1.Notify(message);
+                colleague2.Notify(message);
+            }
+               
+           
+        }
+    }
 
-            public override void BuildSauce()
-            {
-                pizza.SetSauce("mild");
-            }
+    // "Colleague"
+    internal abstract class Colleague
+    {
+        protected Mediator mediator;
 
-            public override void BuildTopping()
-            {
-                pizza.SetTopping("ham+pineapple");
-            }
+        // Constructor
+        public Colleague(Mediator mediator)
+        {
+            this.mediator = mediator;
+        }
+    }
+
+    // "ConcreteColleague1"
+    internal class ConcreteColleague1 : Colleague
+    {
+        // Constructor
+        public ConcreteColleague1(Mediator mediator)
+            : base(mediator)
+        {
         }
 
-        //Concrete Builder
-        class SpicyPizzaBuilder : PizzaBuilder
+        public void Send(string message)
         {
-            public override void BuildDough()
-            {
-                pizza.SetDough("pan baked");
-            }
-
-            public override void BuildSauce()
-            {
-                pizza.SetSauce("hot");
-            }
-
-            public override void BuildTopping()
-            {
-                pizza.SetTopping("pepparoni+salami");
-            }
-        }
-        //Concrete Builder
-        class MargaritaPizzaBuilder : PizzaBuilder
-        {
-            public override void BuildDough()
-            {
-                pizza.SetDough("cross");
-            }
-
-            public override void BuildSauce()
-            {
-                pizza.SetSauce("hot");
-            }
-
-            public override void BuildTopping()
-            {
-                pizza.SetTopping("breast + frozen mushrooms (mixed) + asparagus (sliced) + red pepper (long and thin slices) + olives");
-            }
+            mediator.Send(message, this);
         }
 
-        /** "Director" */
-        class Waiter
+        public void Notify(string message)
         {
-            private PizzaBuilder pizzaBuilder;
+            Console.WriteLine("Colleague1 gets message: "
+                              + message);
+        }
+    }
 
-            public void SetPizzaBuilder(PizzaBuilder pb)
-            {
-                pizzaBuilder =
-                    pb;
-            }
-
-            public Pizza GetPizza()
-            {
-                return pizzaBuilder.GetPizza();
-            }
-
-            public void ConstructPizza()
-            {
-                pizzaBuilder.CreateNewPizza();
-                pizzaBuilder.BuildDough();
-                pizzaBuilder.BuildSauce();
-                pizzaBuilder.BuildTopping();
-            }
+    // "ConcreteColleague2"
+    internal class ConcreteColleague2 : Colleague
+    {
+        // Constructor
+        public ConcreteColleague2(Mediator mediator)
+            : base(mediator)
+        {
         }
 
-        /** A customer ordering a pizza. */
-        class BuilderExample
+        public void Send(string message)
         {
-            public static void Main(String[] args)
-            {
-                Waiter waiter = new Waiter();
-                PizzaBuilder hawaiianPizzaBuilder = new HawaiianPizzaBuilder();
-                PizzaBuilder spicyPizzaBuilder = new SpicyPizzaBuilder();
-                PizzaBuilder margaritaPizzaBuilder = new MargaritaPizzaBuilder();
-                waiter.SetPizzaBuilder(hawaiianPizzaBuilder);
-                waiter.ConstructPizza();
-                Pizza pizza = waiter.GetPizza();
-                pizza.Info();
-                
-                
-                
-            }
+            mediator.Send(message, this);
+        }
+
+        public void Notify(string message)
+        {
+            Console.WriteLine("Colleague2 gets message: " + message);
+        }
+    }
+    // "ConcreteColleague3"
+    internal class ConcreteColleague3 : Colleague
+    {
+        // Constructor
+        public ConcreteColleague3(Mediator mediator)
+            : base(mediator)
+        {
+        }
+
+        public void Send(string message)
+        {
+            mediator.Send(message, this);
+        }
+
+        public void Notify(string message)
+        {
+            Console.WriteLine("Colleague3 gets message: " + message);
         }
     }
 }
