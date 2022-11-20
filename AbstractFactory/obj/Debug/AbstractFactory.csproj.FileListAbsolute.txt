@@ -1,0 +1,6 @@
+/Users/iqura/RiderProjects/AbstractFactory/AbstractFactory/bin/Debug/AbstractFactory.exe
+/Users/iqura/RiderProjects/AbstractFactory/AbstractFactory/bin/Debug/AbstractFactory.pdb
+/Users/iqura/RiderProjects/AbstractFactory/AbstractFactory/obj/Debug/AbstractFactory.csprojAssemblyReference.cache
+/Users/iqura/RiderProjects/AbstractFactory/AbstractFactory/obj/Debug/AbstractFactory.csproj.CoreCompileInputs.cache
+/Users/iqura/RiderProjects/AbstractFactory/AbstractFactory/obj/Debug/AbstractFactory.exe
+/Users/iqura/RiderProjects/AbstractFactory/AbstractFactory/obj/Debug/AbstractFactory.pdb
