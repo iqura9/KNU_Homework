@@ -144,5 +144,11 @@ namespace WindowsFormsApp3
         {
             Helper.StopTimer();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            About aboutForm = new About();
+            aboutForm.ShowDialog();
+        }
     }
 }

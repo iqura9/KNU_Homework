@@ -30,3 +30,4 @@ D:\VSProject\Excel\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\System.ValueTuple
 D:\VSProject\Excel\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CopyComplete
 D:\VSProject\Excel\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form2.resources
 D:\VSProject\Excel\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form3.resources
+D:\VSProject\Excel\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.About.resources
