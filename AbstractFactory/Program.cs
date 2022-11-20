@@ -1,148 +1,98 @@
 ﻿using System;
+using System.Text;
 
 namespace AbstractFactory
 {
-    // Mainapp test application
-    internal class MainApp
+    class Program
     {
-        private static void Main()
+        static void Main(string[] args)
         {
-            var m = new ConcreteMediator();
-            var c1 = new ConcreteColleague1(m);
-            var c2 = new ConcreteColleague2(m);
-            var c3 = new ConcreteColleague3(m);
-            m.Colleague1 = c1;
-            m.Colleague2 = c2;
-            m.Colleague3 = c3;
-            m.Send("How are you?", c1);
-            m.Send("Fine, thanks", c2);
-            m.Send("Hello!", c3);
+            Console.OutputEncoding = Encoding.UTF8;
+            IFigure figure = new Rectangle(10, 20);
+            IFigure clonedFigure = figure.Clone();
+            figure.GetInfo();
+            clonedFigure.GetInfo();
+            figure = new Circle(15);
+            clonedFigure = figure.Clone();
+            figure.GetInfo();
+            clonedFigure.GetInfo();
             
-            // Wait for user
+            figure = new Triangle(15,15);
+            clonedFigure = figure.Clone();
+            figure.GetInfo();
+            clonedFigure.GetInfo();
+            
             Console.Read();
         }
     }
 
-    // "Mediator"
-    internal abstract class Mediator
+    interface IFigure
     {
-        public abstract void Send(string message,
-            Colleague colleague);
+        IFigure Clone();
+
+        void GetInfo();
     }
 
-    // "ConcreteMediator"
-    internal class ConcreteMediator : Mediator
+    class Rectangle : IFigure
     {
-        private ConcreteColleague1 colleague1;
-        private ConcreteColleague2 colleague2;
-        private ConcreteColleague3 colleague3;
+        int width;
+        int height;
 
-        public ConcreteColleague1 Colleague1
+        public Rectangle(int w, int h)
         {
-            set => colleague1 = value;
+            width = w;
+            height = h;
         }
 
-        public ConcreteColleague2 Colleague2
+        public IFigure Clone()
         {
-            set => colleague2 = value;
-        }
-        public ConcreteColleague3 Colleague3
-        {
-            set => colleague3 = value;
+            return new Rectangle(this.width, this.height);
         }
 
-        public override void Send(string message,
-            Colleague colleague)
+        public void GetInfo()
         {
-            if (colleague == colleague1)
-            {
-                colleague2.Notify(message);
-                colleague3.Notify(message);
-            }
-            else if (colleague == colleague2)
-            {
-                colleague1.Notify(message);
-                colleague3.Notify(message);
-            }
-            else if (colleague == colleague3)
-            {
-                colleague1.Notify(message);
-                colleague2.Notify(message);
-            }
-               
-           
+            Console.WriteLine("Прямокутник довжиною {0} и шириною {1}", height, width);
         }
     }
 
-    // "Colleague"
-    internal abstract class Colleague
+    class Circle : IFigure
     {
-        protected Mediator mediator;
+        int radius;
 
-        // Constructor
-        public Colleague(Mediator mediator)
+        public Circle(int r)
         {
-            this.mediator = mediator;
+            radius = r;
+        }
+
+        public IFigure Clone()
+        {
+            return new Circle(this.radius);
+        }
+
+        public void GetInfo()
+        {
+            Console.WriteLine("Круг радіусом {0}", radius);
         }
     }
-
-    // "ConcreteColleague1"
-    internal class ConcreteColleague1 : Colleague
+    class Triangle : IFigure
     {
-        // Constructor
-        public ConcreteColleague1(Mediator mediator)
-            : base(mediator)
+        int height;
+        int width;
+
+        public Triangle(int h, int w)
         {
+            height = h;
+            width = w;
         }
 
-        public void Send(string message)
+        public IFigure Clone()
         {
-            mediator.Send(message, this);
+            return new Triangle(this.height, this.width);
         }
 
-        public void Notify(string message)
+        public void GetInfo()
         {
-            Console.WriteLine("Colleague1 gets message: "
-                              + message);
-        }
-    }
-
-    // "ConcreteColleague2"
-    internal class ConcreteColleague2 : Colleague
-    {
-        // Constructor
-        public ConcreteColleague2(Mediator mediator)
-            : base(mediator)
-        {
-        }
-
-        public void Send(string message)
-        {
-            mediator.Send(message, this);
-        }
-
-        public void Notify(string message)
-        {
-            Console.WriteLine("Colleague2 gets message: " + message);
-        }
-    }
-    // "ConcreteColleague3"
-    internal class ConcreteColleague3 : Colleague
-    {
-        // Constructor
-        public ConcreteColleague3(Mediator mediator)
-            : base(mediator)
-        {
-        }
-
-        public void Send(string message)
-        {
-            mediator.Send(message, this);
-        }
-
-        public void Notify(string message)
-        {
-            Console.WriteLine("Colleague3 gets message: " + message);
+            Console.WriteLine("Трикутник висотою {0} і шириною {1}", height, width);
         }
     }
 }
